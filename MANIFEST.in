@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+recursive-include include *
+recursive-include src *.cpp
+recursive-include pyfastyaml *.py py.typed
+recursive-include tests *.py

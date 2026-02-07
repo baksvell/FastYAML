@@ -1,0 +1,30 @@
+# GitHub Actions workflow (block-style)
+# Using "triggers" instead of "on" (YAML treats "on" as boolean)
+name: CI
+triggers:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        run: pytest tests/ -v
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run linter
+        run: echo "Lint check"

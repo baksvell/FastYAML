@@ -1,0 +1,23 @@
+# Ansible playbook (block-style)
+- name: Configure web servers
+  hosts: webservers
+  become: true
+  vars:
+    http_port: 80
+    max_clients: 200
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: true
+    - name: Ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: true
+    - name: Copy config
+      copy:
+        src: /etc/nginx/sites-available/default
+        dest: /etc/nginx/sites-available/default
+        backup: true

@@ -1,0 +1,22 @@
+# Prometheus config (block-style)
+# Quote values with colons - FastYAML MVP limitation
+global:
+  scrape_interval: "15s"
+  evaluation_interval: "15s"
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - "localhost:9093"
+rule_files:
+  - first_rules.yml
+  - second_rules.yml
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - "localhost:9090"
+  - job_name: node
+    static_configs:
+      - targets:
+          - "localhost:9100"
