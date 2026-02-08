@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0b5] - 2025-02-07
+
+### Changed
+
+- Add PyYAML CSafeLoader (libyaml) to benchmarks
+- Update README benchmark table with PyYAML (C) column and accurate comparisons
+
 ## [0.1.0b4] - 2025-02-07
 
 ### Added
@@ -48,7 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flow syntax: `[a, b, c]`, `{a: 1, b: 2}`
 - Multiline strings: `|` (literal), `>` (folded)
 
-[Unreleased]: https://github.com/baksvell/FastYAML/compare/v0.1.0b4...HEAD
+[Unreleased]: https://github.com/baksvell/FastYAML/compare/v0.1.0b5...HEAD
+[0.1.0b5]: https://github.com/baksvell/FastYAML/compare/v0.1.0b4...v0.1.0b5
 [0.1.0b4]: https://github.com/baksvell/FastYAML/compare/v0.1.0b3...v0.1.0b4
 [0.1.0b3]: https://github.com/baksvell/FastYAML/compare/v0.1.0b2...v0.1.0b3
 [0.1.0b2]: https://github.com/baksvell/FastYAML/compare/v0.1.0b1...v0.1.0b2
