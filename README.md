@@ -2,7 +2,7 @@
 
 [![PyPI version](https://badge.fury.io/py/pyfastyaml.svg)](https://pypi.org/project/pyfastyaml/)
 
-**pyfastyaml** — Fast YAML parser for Python with C++/SIMD backend. **100–300× faster** than PyYAML and ruamel.yaml. API compatible with PyYAML for typical config use cases (Kubernetes, Ansible, CI, Docker Compose).
+**pyfastyaml** — Fast YAML parser for Python with C++/SIMD backend. **12–18× faster** than PyYAML (CSafeLoader/libyaml), **100–170× faster** than PyYAML (SafeLoader), **150–220× faster** than ruamel.yaml. API compatible with PyYAML for typical config use cases (Kubernetes, Ansible, CI, Docker Compose).
 
 ## Features
 
@@ -61,12 +61,14 @@ data = yaml.load("config.yaml")
 
 Parsing time (μs, lower is better):
 
-| Size     | pyfastyaml | PyYAML | ruamel | pyfastyaml vs PyYAML |
-|----------|----------|--------|--------|--------------------|
-| Small (~200 B)   | ~2   | ~229 | ~377 | **~112× faster** |
-| Medium (~1.5 KB) | ~7   | ~1,034 | ~1,777 | **~141× faster** |
-| Large (~15 KB)   | ~66  | ~11,153 | ~19,040 | **~170× faster** |
-| Realworld        | ~5   | ~841 | ~1,544 | **~161× faster** |
+| Size     | pyfastyaml | PyYAML (C) | PyYAML | ruamel |
+|----------|------------|------------|--------|--------|
+| Small (~200 B)   | ~2.3   | ~32   | ~229  | ~376  |
+| Medium (~1.5 KB) | ~11    | ~134  | ~1,014| ~1,689|
+| Large (~15 KB)   | ~83    | ~1,483| ~11,169| ~17,954|
+| Realworld        | ~6.4   | ~98   | ~833  | ~1,388|
+
+*PyYAML (C)* = CSafeLoader (libyaml extension). *PyYAML* = SafeLoader (pure Python).
 
 Run benchmarks:
 

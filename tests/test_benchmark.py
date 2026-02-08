@@ -17,8 +17,14 @@ try:
     import yaml
 
     HAS_PYYAML = True
+    try:
+        yaml.CSafeLoader
+        HAS_CSAFELOADER = True
+    except AttributeError:
+        HAS_CSAFELOADER = False
 except ImportError:
     HAS_PYYAML = False
+    HAS_CSAFELOADER = False
 
 try:
     from ruamel.yaml import YAML
@@ -31,6 +37,10 @@ except ImportError:
 
 def _pyyaml_loads(s: str):
     return yaml.safe_load(s)
+
+
+def _pyyaml_csafe_loads(s: str):
+    return yaml.load(s, Loader=yaml.CSafeLoader)
 
 
 def _ruamel_loads(s: str):
@@ -100,6 +110,40 @@ def test_bench_pyyaml_large(benchmark):
 def test_bench_pyyaml_realworld(benchmark):
     """Parse real-world YAML with PyYAML."""
     result = benchmark(_pyyaml_loads, YAML_REALWORLD)
+    assert "name" in result
+
+
+# --- PyYAML CSafeLoader (C extension) ---
+
+@pytest.mark.benchmark(group="small")
+@pytest.mark.skipif(not HAS_CSAFELOADER, reason="PyYAML CSafeLoader not available (libyaml)")
+def test_bench_pyyaml_csafe_small(benchmark):
+    """Parse small YAML with PyYAML CSafeLoader (C)."""
+    result = benchmark(_pyyaml_csafe_loads, YAML_SMALL)
+    assert "title" in result
+
+
+@pytest.mark.benchmark(group="medium")
+@pytest.mark.skipif(not HAS_CSAFELOADER, reason="PyYAML CSafeLoader not available (libyaml)")
+def test_bench_pyyaml_csafe_medium(benchmark):
+    """Parse medium YAML with PyYAML CSafeLoader (C)."""
+    result = benchmark(_pyyaml_csafe_loads, YAML_MEDIUM)
+    assert "owner" in result
+
+
+@pytest.mark.benchmark(group="large")
+@pytest.mark.skipif(not HAS_CSAFELOADER, reason="PyYAML CSafeLoader not available (libyaml)")
+def test_bench_pyyaml_csafe_large(benchmark):
+    """Parse large YAML with PyYAML CSafeLoader (C)."""
+    result = benchmark(_pyyaml_csafe_loads, YAML_LARGE)
+    assert "title" in result
+
+
+@pytest.mark.benchmark(group="realworld")
+@pytest.mark.skipif(not HAS_CSAFELOADER, reason="PyYAML CSafeLoader not available (libyaml)")
+def test_bench_pyyaml_csafe_realworld(benchmark):
+    """Parse real-world YAML with PyYAML CSafeLoader (C)."""
+    result = benchmark(_pyyaml_csafe_loads, YAML_REALWORLD)
     assert "name" in result
 
 
