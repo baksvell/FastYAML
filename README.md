@@ -125,6 +125,38 @@ python setup.py build_ext --inplace
 pytest tests/
 ```
 
+## ConfigLint (experimental)
+
+`configlint` is an experimental YAML dev-tool (lint / fix / format) built on top of FastYAML.
+
+Configuration (optional): create `.configlint.yaml` in your repo root (auto-discovered).
+
+Install (from PyPI, `configlint` ships with `pyfastyaml`):
+
+```bash
+pip install pyfastyaml
+```
+
+Run:
+
+```bash
+# If configlint is on PATH
+configlint check path/to/configs
+configlint fix path/to/configs --keep last
+configlint format path/to/configs
+configlint format path/to/configs --check
+
+# Or always works without PATH changes
+python -m configlint check path/to/configs
+python -m configlint fix path/to/configs --keep last
+python -m configlint format path/to/configs
+
+# stdin modes (useful in CI / editors)
+type config.yaml | python -m configlint check --stdin --path config.yaml
+type config.yaml | python -m configlint fix --stdin --path config.yaml > config.yaml.fixed
+type config.yaml | python -m configlint format --stdin > config.yaml.formatted
+```
+
 Benchmark commands:
 
 ```bash

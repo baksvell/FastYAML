@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-02-07
+
+### Added
+
+- `configlint` YAML dev-tool: `check`, `fix`, `format`, `explain`, `list-rules`
+- YAML rules: duplicate keys, unused anchors, hygiene (tabs, trailing whitespace, final newline)
+- Rulesets and configuration: `.configlint.yaml`, `ruleset` presets, `--select` / `--ignore`, `--fail-on`
+- CLI features: `--diff`, `--output`, `--quiet`, `--no-summary`, `--exit-zero`
+- `--stdin` support for `configlint check`, `fix`, and `format` for editor / CI integrations
+
+### Changed
+
+- Package `configlint` is shipped alongside `pyfastyaml` from the main distribution
+
 ## [0.1.0b5] - 2025-02-07
 
 ### Changed
@@ -55,7 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Flow syntax: `[a, b, c]`, `{a: 1, b: 2}`
 - Multiline strings: `|` (literal), `>` (folded)
 
-[Unreleased]: https://github.com/baksvell/FastYAML/compare/v0.1.0b5...HEAD
+[Unreleased]: https://github.com/baksvell/FastYAML/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/baksvell/FastYAML/compare/v0.1.0b5...v0.2.0
 [0.1.0b5]: https://github.com/baksvell/FastYAML/compare/v0.1.0b4...v0.1.0b5
 [0.1.0b4]: https://github.com/baksvell/FastYAML/compare/v0.1.0b3...v0.1.0b4
 [0.1.0b3]: https://github.com/baksvell/FastYAML/compare/v0.1.0b2...v0.1.0b3

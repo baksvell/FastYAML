@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyfastyaml"
-version = "0.1.0b5"
+version = "0.2.0"
 description = "Fast YAML parser for Python with C++/SIMD backend"
 readme = { file = "README.md", content-type = "text/markdown" }
 requires-python = ">=3.10"
@@ -25,6 +25,9 @@ classifiers = [
     "Topic :: Text Processing :: Markup",
 ]
 
+[project.scripts]
+configlint = "configlint.cli:main"
+
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "pytest-benchmark", "PyYAML>=6.0", "ruamel.yaml>=0.18", "build", "twine"]
 
@@ -41,7 +44,10 @@ addopts = "-v"
 filterwarnings = ["ignore:SetuptoolsDeprecationWarning"]
 
 [tool.setuptools]
-packages = ["pyfastyaml"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["pyfastyaml*", "configlint*"]
 
 [tool.setuptools.package-data]
 pyfastyaml = ["py.typed"]
